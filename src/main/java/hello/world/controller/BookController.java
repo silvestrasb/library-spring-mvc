@@ -18,7 +18,7 @@ public class BookController {
     @GetMapping
     public String getBooks(Model model) {
         model.addAttribute("books", bookService.findAllBooks());
-        return "cars/book-list";
+        return "books/book-list";
     }
 
     @GetMapping("/{id}/delete")
