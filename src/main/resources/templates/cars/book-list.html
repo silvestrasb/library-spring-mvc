@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+  <head>
+    <style>
+      @import url("https://fonts.googleapis.com/css2?family=Gentium+Book+Basic:ital@1&family=Roboto:wght@100&display=swap");
+
+      * {
+        margin: 0;
+        padding: 0;
+        font-family: "Gentium Book Basic", serif;
+      }
+
+      /* HEADER STYLE: */
+      header {
+        width: 100%;
+        padding-right: 8%;
+        padding-left: 8%;
+        box-sizing: border-box;
+        overflow: hidden;
+      }
+
+      nav {
+        flex: 1;
+        text-align: right;
+      }
+
+      nav ul li {
+        list-style: none;
+        display: inline-block;
+        margin-right: 30px;
+      }
+
+      nav ul li a {
+        text-decoration: none;
+        color: #000;
+        font-size: 14px;
+      }
+
+      .navbar {
+        width: 100%;
+        display: flex;
+        align-items: center;
+      }
+
+      .logo {
+        width: 50px;
+        cursor: pointer;
+        margin: 30px 0;
+      }
+
+      .menu-icon {
+        width: 25px;
+        cursor: pointer;
+        display: none;
+      }
+
+      /* MAIN STYLE: */
+      main {
+        text-align: center;
+      }
+
+      main h1 {
+        font-size: 25px;
+      }
+
+      table {
+        border: 1px solid #ccc;
+        width: 100%;
+        margin: 0;
+        padding: 0;
+        border-collapse: collapse;
+        border-spacing: 0;
+      }
+
+      table tr {
+        border: 1px solid #ddd;
+        padding: 5px;
+        background: #fff;
+      }
+
+      table th,
+      table td {
+        padding: 10px;
+        text-align: center;
+      }
+
+      table th {
+        text-transform: uppercase;
+        letter-spacing: 1px;
+      }
+
+      .return-btn {
+        background-color: black;
+        border: none;
+        color: white;
+        padding: 15px 32px;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        border-radius: 5px;
+        cursor: pointer;
+      }
+
+      /* FOOTER STYLE: */
+      footer {
+        border: 10px solid black;
+        position: fixed;
+        bottom: 0;
+        width: 100%;
+        background-color: black;
+        color: white;
+        text-align: center;
+      }
+
+      /* DESKTOP STYLE */
+      @media only screen and (min-width: 1281px) {
+        /* HEADER STYLE: */
+        nav ul li a {
+          font-size: 30px;
+        }
+
+        /* MAIN STYLE: */
+        main h1 {
+          font-size: 30px;
+        }
+
+        button {
+          font-size: 20px;
+        }
+
+        thead tr {
+          font-size: 20px;
+        }
+
+        #card table td {
+          font-size: 20px;
+        }
+      }
+
+      /* MOBILE STYLE */
+      @media only screen and (max-width: 767px) {
+        /* HEADER STYLE: */
+        nav ul {
+          width: 100%;
+          background-color: black;
+          position: absolute;
+          top: 75px;
+          right: 0px;
+          z-index: 2;
+        }
+
+        nav ul li {
+          display: block;
+          margin-top: 10px;
+          margin-bottom: 10px;
+        }
+
+        nav ul li a {
+          color: white;
+        }
+
+        /* MAIN STYLE:  */
+        main h1 {
+          font-size: 20px;
+        }
+
+        .menu-icon {
+          display: block;
+        }
+
+        .return-btn {
+          padding: 10px 20px;
+        }
+
+        #card table {
+          border: 0;
+        }
+
+        #card table thead {
+          display: none;
+        }
+
+        #card table tr {
+          margin-bottom: 20px;
+          display: block;
+          border-bottom: 2px solid #ddd;
+          box-shadow: 2px 2px 1px #dadada;
+        }
+
+        #card table td {
+          display: block;
+          text-align: right;
+          font-size: 13px;
+        }
+
+        #card table td:last-child {
+          border-bottom: 0;
+        }
+
+        #card table td::before {
+          content: attr(data-label);
+          float: left;
+          text-transform: uppercase;
+          font-weight: bold;
+        }
+
+        #card tbody {
+          line-height: 0;
+        }
+      }
+    </style>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="book-list.css" />
+    <title>Book List</title>
+  </head>
+  <body>
+    <header>
+      <div class="navbar">
+        <img src="logo.png" class="logo" alt="logo" />
+        <nav>
+          <ul id="menuList">
+            <li><a href="book-search.html">Search</a></li>
+            <li><a href="book-list.html">Book List</a></li>
+            <li><a href="#" onclick="logoutPrompt()">Logout</a></li>
+          </ul>
+        </nav>
+        <img
+          src="menu.png"
+          class="menu-icon"
+          onclick="toggleMenu()"
+          alt="menu icon"
+        />
+      </div>
+    </header>
+
+    <main>
+      <section>
+        <h1>
+          <span style="color: darkgreen">
+            Silvestras Bumblauskas
+            <br />
+            (silvestras.bumblauskas@gmail.com)
+          </span>
+        </h1>
+        <div id="card">
+          <table>
+            <thead>
+
+              <tr>
+                <th>Id</th>
+                <th>Title</th>
+                <th>Author</th>
+                <th>Genre</th>
+                <th>Action</th>
+              </tr>
+            </thead>
+            <tbody>
+            <tr th:each="book: ${books}">
+              <td th:text="${book.id}">1</td>
+              <td th:text="${book.title}">Toyota</td>
+              <td th:text="${book.author}">Prius</td>
+              <td th:text="${book.genre}">2009</td>
+
+              <td data-label="Actions">
+                <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet"/>
+                <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet"/>
+
+
+                <a th:href="@{/books/{id}/delete(id = ${book.id})}" class="btn btn-success"> <i class="fa fa-arrow-circle-o-left"></i>Delete</a>
+<!--                <button class="return-btn">Return</button>-->
+              </td>
+            </tbody>
+          </table>
+        </div>
+      </section>
+    </main>
+
+    <footer>
+      <p>
+        Copyright &copy; 2021 CodeAcademy. Designed By Silvestras Bumblauskas.
+      </p>
+    </footer>
+    <script>
+      let menuList = document.getElementById("menuList");
+      menuList.style.height = "0px";
+
+      document.querySelectorAll(".return-btn").forEach((element) => {
+        element.onclick = function () {
+          prompt("Are you sure you want to return this book?");
+        };
+      });
+
+      if (window.visualViewport.width <= 767) {
+        menuList.style.display = "none";
+      }
+
+      function toggleMenu() {
+        if (menuList.style.height == "0px") {
+          menuList.style.height = "130px";
+          menuList.style.display = "block";
+        } else {
+          menuList.style.height = "0px";
+          menuList.style.display = "none";
+        }
+      }
+
+      function logoutPrompt() {
+        prompt("Are you sure you want to logout?");
+      }
+    </script>
+  </body>
+</html>

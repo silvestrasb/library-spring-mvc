@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:insert="fragments/layout :: head(#{login.title})"></head>
+<body>
+
+<header th:replace="fragments/layout :: header"></header>
+
+<main class="container">
+    <h1 th:text="#{login.title}">Sign in</h1>
+    <div th:if="${param.error != null}" th:text="#{error.login}" class="alert alert-danger" role="alert">
+        <hr>
+        <div th:text="#{error.login}" class="alert alert-danger" role="alert">
+            Bad credentials
+        </div>
+    </div>
+    <div th:if="${registerSuccess} != null">
+        <hr>
+        <div th:text="#{register.success}" class="alert alert-success" role="alert">
+            Successfully signed up
+        </div>
+    </div>
+    <hr>
+    <form th:method="POST" th:action="@{/login}" th:object="${userLogin}">
+        <div class="row">
+            <div class="col-lg-3 col-md-4 col-sm-6">
+                <div th:if="${#fields.hasErrors()}" class="alert alert-danger" role="alert">
+                    <ul>
+                        <li th:each="err : ${#fields.errors()}" th:text="${err}"></li>
+                    </ul>
+                </div>
+                <div class="form-group">
+                    <label for="username"><strong th:text="#{users.username}">Username</strong></label>
+                    <input type="text" id="username" name="username" class="form-control" th:field="*{username}"
+                           th:placeholder="#{users.username}" th:errorclass="is-invalid">
+                    <p th:if="${#fields.hasErrors('username')}" th:errors="*{username}" class="text-danger small">
+                        Error</p>
+                </div>
+                <div class="form-group">
+                    <label for="password"><strong th:text="#{users.password}">Password</strong></label>
+                    <input type="password" id="password" name="password" class="form-control" th:field="*{password}"
+                           th:placeholder="#{users.password}" th:errorclass="is-invalid">
+                    <p th:if="${#fields.hasErrors('password')}" th:errors="*{password}" class="text-danger small">
+                        Error</p>
+                </div>
+                <hr>
+                <button th:text="#{button.signin}" class="btn btn-dark">Sign in</button>
+            </div>
+        </div>
+    </form>
+</main>
+
+</body>
+</html>

@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:insert="fragments/layout :: head(#{register.title})"></head>
+<body>
+
+<header th:replace="fragments/layout :: header"></header>
+
+<main class="container">
+    <h1 th:text="#{register.title}">Sign up</h1>
+    <hr>
+    <form id="register" th:method="POST" th:action="@{/register}" th:object="${userRegistration}">
+        <div class="row">
+            <div class="col-lg-3 col-md-4 col-sm-6">
+                <div th:if="${#fields.hasErrors()}" class="alert alert-danger" role="alert">
+                    <ul>
+                        <li th:each="err : ${#fields.errors()}" th:text="${err}"></li>
+                    </ul>
+                </div>
+                <div class="form-group">
+                    <label for="username"><strong th:text="#{users.username}">Username</strong></label>
+                    <input type="text" id="username" name="username" class="form-control" th:field="*{username}"
+                           th:placeholder="#{users.username}" th:errorclass="is-invalid">
+                    <p th:if="${#fields.hasErrors('username')}" th:errors="*{username}" class="text-danger small">
+                        Error</p>
+                </div>
+                <div class="form-group">
+                    <label for="password"><strong th:text="#{users.password}">Password</strong></label>
+                    <input type="password" id="password" name="password" class="form-control" th:field="*{password}"
+                           th:placeholder="#{users.password}" th:errorclass="is-invalid">
+                    <p th:if="${#fields.hasErrors('password')}" th:errors="*{password}" class="text-danger small">
+                        Error</p>
+                </div>
+                <div class="form-group">
+                    <label for="confirmPassword"><strong th:text="#{users.confirmPassword}">Confirm
+                        password</strong></label>
+                    <input type="password" id="confirmPassword" name="confirmPassword" class="form-control"
+                           th:field="*{confirmPassword}"
+                           th:placeholder="#{users.confirmPassword}" th:errorclass="is-invalid">
+                    <p th:if="${#fields.hasErrors('confirmPassword')}" th:errors="*{confirmPassword}"
+                       class="text-danger small">
+                        Error</p>
+                </div>
+                <div class="form-group">
+                    <label for="companyId"><strong th:text="#{users.company}">Company</strong></label>
+                    <select id="companyId" name="companyId" form="register" class="form-control">
+                        <option th:each="company: ${companies}" th:value="${company.id}"
+                                th:text="${company.name}">
+                            Tesla
+                        </option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="firstName"><strong th:text="#{users.firstName}">First name</strong></label>
+                    <input type="text" id="firstName" name="firstName" class="form-control" th:field="*{firstName}"
+                           th:placeholder="#{users.firstName}" th:errorclass="is-invalid">
+                    <p th:if="${#fields.hasErrors('firstName')}" th:errors="*{firstName}" class="text-danger small">
+                        Error</p>
+                </div>
+                <div class="form-group">
+                    <label for="lastName"><strong th:text="#{users.lastName}">Last name</strong></label>
+                    <input type="text" id="lastName" name="lastName" class="form-control" th:field="*{lastName}"
+                           th:placeholder="#{users.lastName}" th:errorclass="is-invalid">
+                    <p th:if="${#fields.hasErrors('lastName')}" th:errors="*{lastName}" class="text-danger small">
+                        Error</p>
+                </div>
+                <div class="form-group">
+                    <label for="age"><strong th:text="#{users.age}">Age</strong></label>
+                    <input type="number" id="age" name="age" class="form-control" th:field="*{age}"
+                           th:placeholder="#{users.age}" th:errorclass="is-invalid">
+                    <p th:if="${#fields.hasErrors('age')}" th:errors="*{age}" class="text-danger small">
+                        Error</p>
+                </div>
+
+                <div class="form-check">
+                    <label for="isAdmin" class="form-check-label" th:text="#{users.admin}">Admin</label>
+                    <input form="register" id="isAdmin" class="form-check-input" type="checkbox" th:field="*{isAdmin}">
+                </div>
+                <hr>
+                <button th:text="#{button.signup}" class="btn btn-dark">
+                    Sign up
+                </button>
+            </div>
+        </div>
+    </form>
+</main>
+
+</body>
+</html>

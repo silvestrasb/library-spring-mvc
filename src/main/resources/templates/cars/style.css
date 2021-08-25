@@ -1,0 +1,163 @@
+@import url("https://fonts.googleapis.com/css2?family=Gentium+Book+Basic:ital@1&family=Roboto:wght@100&display=swap");
+
+* {
+  margin: 0;
+  padding: 0;
+  font-family: "Gentium Book Basic", serif;
+}
+
+/* HEADER STYLE: */
+header {
+  width: 100%;
+  min-height: 30vh;
+  padding-right: 8%;
+  padding-left: 8%;
+  box-sizing: border-box;
+  overflow: hidden;
+}
+
+nav {
+  flex: 1;
+  text-align: right;
+  vertical-align: middle;
+}
+
+nav ul li {
+  list-style: none;
+  display: inline-block;
+  margin-right: 30px;
+}
+
+nav ul li a {
+  text-decoration: none;
+  color: #000;
+  font-size: 14px;
+}
+
+.navbar {
+  width: 100%;
+  display: flex;
+  align-items: center;
+}
+
+.logo {
+  width: 50px;
+  cursor: pointer;
+  margin: 30px 0;
+}
+
+.menu-icon {
+  width: 25px;
+  cursor: pointer;
+  display: none;
+}
+
+/* MAIN STYLE: */
+main {
+  text-align: center;
+}
+
+section h1 {
+  font-size: 20px;
+}
+
+form {
+  display: inline-block;
+}
+
+input[type="submit"] {
+  width: 80%;
+  padding: 12px 20px;
+  margin: 8px 0;
+  border: none;
+  border-radius: 4px;
+  box-sizing: border-box;
+  background-color: black;
+  color: white;
+  cursor: pointer;
+}
+
+.input-field {
+  padding: 12px 20px;
+  margin: 8px 0;
+  display: block;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+  width: 400px;
+}
+
+/* FOOTER STYLE: */
+footer {
+  border: 10px solid black;
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  background-color: black;
+  color: white;
+  text-align: center;
+}
+
+/* MOBILE STYLE */
+@media only screen and (max-width: 767px) {
+  /* HEADER STYLE: */
+  section h1 {
+    font-size: 20px;
+  }
+
+  nav ul {
+    width: 100%;
+    background-color: black;
+    position: absolute;
+    top: 75px;
+    right: 0px;
+    z-index: 2;
+  }
+
+  nav ul li {
+    display: block;
+    margin-top: 10px;
+    margin-bottom: 10px;
+  }
+
+  nav ul li a {
+    color: white;
+  }
+
+  .menu-icon {
+    display: block;
+  }
+
+  /* MAIN STYLE: */
+  .input-field {
+    width: 250px;
+  }
+}
+
+/* DESKTOP STYLE */
+@media only screen and (min-width: 1281px) {
+  /* HEADER STYLE: */
+  section h1 {
+    font-size: 30px;
+  }
+
+  nav ul li a {
+    font-size: 30px;
+  }
+
+  /* MAIN STYLE: */
+  input[type="submit"] {
+    font-size: 20px;
+  }
+
+  button,
+  .input-field,
+  thead tr,
+  .signup_link {
+    font-size: 20px;
+  }
+
+  .input-field {
+    font-size: 20px;
+  }
+}

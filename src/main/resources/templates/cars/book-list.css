@@ -1,0 +1,206 @@
+@import url("https://fonts.googleapis.com/css2?family=Gentium+Book+Basic:ital@1&family=Roboto:wght@100&display=swap");
+
+* {
+  margin: 0;
+  padding: 0;
+  font-family: "Gentium Book Basic", serif;
+}
+
+/* HEADER STYLE: */
+header {
+  width: 100%;
+  padding-right: 8%;
+  padding-left: 8%;
+  box-sizing: border-box;
+  overflow: hidden;
+}
+
+nav {
+  flex: 1;
+  text-align: right;
+}
+
+nav ul li {
+  list-style: none;
+  display: inline-block;
+  margin-right: 30px;
+}
+
+nav ul li a {
+  text-decoration: none;
+  color: #000;
+  font-size: 14px;
+}
+
+.navbar {
+  width: 100%;
+  display: flex;
+  align-items: center;
+}
+
+.logo {
+  width: 50px;
+  cursor: pointer;
+  margin: 30px 0;
+}
+
+.menu-icon {
+  width: 25px;
+  cursor: pointer;
+  display: none;
+}
+
+/* MAIN STYLE: */
+main {
+  text-align: center;
+}
+
+main h1 {
+  font-size: 25px;
+}
+
+table {
+  border: 1px solid #ccc;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+
+table tr {
+  border: 1px solid #ddd;
+  padding: 5px;
+  background: #fff;
+}
+
+table th,
+table td {
+  padding: 10px;
+  text-align: center;
+}
+
+table th {
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.return-btn {
+  background-color: black;
+  border: none;
+  color: white;
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+/* FOOTER STYLE: */
+footer {
+  border: 10px solid black;
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  background-color: black;
+  color: white;
+  text-align: center;
+}
+
+/* DESKTOP STYLE */
+@media only screen and (min-width: 1281px) {
+  /* HEADER STYLE: */
+  nav ul li a {
+    font-size: 30px;
+  }
+
+  /* MAIN STYLE: */
+  main h1 {
+    font-size: 30px;
+  }
+
+  button {
+    font-size: 20px;
+  }
+
+  thead tr {
+    font-size: 20px;
+  }
+
+  #card table td {
+    font-size: 20px;
+  }
+}
+
+/* MOBILE STYLE */
+@media only screen and (max-width: 767px) {
+  /* HEADER STYLE: */
+  nav ul {
+    width: 100%;
+    background-color: black;
+    position: absolute;
+    top: 75px;
+    right: 0px;
+    z-index: 2;
+  }
+
+  nav ul li {
+    display: block;
+    margin-top: 10px;
+    margin-bottom: 10px;
+  }
+
+  nav ul li a {
+    color: white;
+  }
+
+  /* MAIN STYLE:  */
+  main h1 {
+    font-size: 20px;
+  }
+
+  .menu-icon {
+    display: block;
+  }
+
+  .return-btn {
+    padding: 10px 20px;
+  }
+
+  #card table {
+    border: 0;
+  }
+
+  #card table thead {
+    display: none;
+  }
+
+  #card table tr {
+    margin-bottom: 20px;
+    display: block;
+    border-bottom: 2px solid #ddd;
+    box-shadow: 2px 2px 1px #dadada;
+  }
+
+  #card table td {
+    display: block;
+    text-align: right;
+    font-size: 13px;
+  }
+
+  #card table td:last-child {
+    border-bottom: 0;
+  }
+
+  #card table td::before {
+    content: attr(data-label);
+    float: left;
+    text-transform: uppercase;
+    font-weight: bold;
+  }
+
+  #card tbody {
+    line-height: 0;
+  }
+}

@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
+      xmlns="http://www.w3.org/1999/html">
+
+<head th:fragment="head(title)">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title th:text="*{title}">Title</title>
+    <link th:href="@{/css/bootstrap.min.css}" rel="stylesheet"/>
+    <script th:src="@{/js/bootstrap.bundle.min.js}"></script>
+    <link th:href="@{/css/style.css}" rel="stylesheet"/>
+</head>
+
+<body>
+
+<header th:fragment="header">
+    <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
+        <div class="container-fluid">
+            <a class="navbar-brand" th:href="@{/}">JAVA2-7</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse"
+                    aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarCollapse">
+                <ul class="navbar-nav me-auto mb-2 mb-md-0">
+                    <li sec:authorize="isAnonymous()" class="nav-item">
+                        <a class="nav-link" aria-current="page" th:text="#{login.title}" th:href="@{/login}"
+                           th:classappend="${#request.getRequestURI().equals('/login')} ? active">Login</a>
+                    </li>
+                    <li sec:authorize="isAnonymous()" class="nav-item">
+                        <a class="nav-link" aria-current="page" th:text="#{register.title}" th:href="@{/register}"
+                           th:classappend="${#request.getRequestURI().equals('/register')} ? active">Register</a>
+                    </li>
+                    <li th:if="${#authorization.expression('hasRole(''ADMIN'')')}" class="nav-item">
+                        <a class="nav-link" aria-current="page" th:text="#{cars.title.all}" th:href="@{/cars}"
+                           th:classappend="${#request.getRequestURI().equals('/cars')} ? active">All cars</a>
+                    </li>
+                    <li sec:authorize="isAuthenticated()" class="nav-item">
+                        <a class="nav-link" aria-current="page" th:text="#{cars.title.my}" th:href="@{/cars/user}"
+                           th:classappend="${#request.getRequestURI().equals('/cars/user')} ? active">My cars</a>
+                    </li>
+                    <li sec:authorize="isAuthenticated()" class="nav-item">
+                        <a class="nav-link" aria-current="page" th:text="#{logout.title}" th:href="@{/logout}"
+                           th:classappend="${#request.getRequestURI().equals('/logout')} ? active">Logout</a>
+                    </li>
+                    <li sec:authorize="isAuthenticated()" class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="dropdown01" data-bs-toggle="dropdown"
+                           aria-expanded="false"
+                           th:text="${#locale.toLanguageTag().toUpperCase()}"
+                        ></a>
+                        <ul class="dropdown-menu" aria-labelledby="dropdown01">
+                            <li><a class="dropdown-item" th:href="@{''(lang='lt')}"
+                                   th:unless="${#locale.toString().equals('lt')}">LT</a></li>
+                            <li><a class="dropdown-item" th:href="@{''(lang='en')}"
+                                   th:unless="${#locale.toString().equals('en')}">EN</a></li>
+                        </ul>
+                    </li>
+                </ul>
+                <form th:if="${#request.getRequestURI().equals('/cars')}" th:method="GET" th:action="@{/cars}"
+                      class="d-flex">
+                    <input th:value="${param.search}" th:placeholder="#{input.search}" name="search"
+                           class="form-control me-2" type="search" aria-label="Search">
+                    <button th:text="#{button.search}" class="btn btn-outline-light" type="submit">Search</button>
+                </form>
+            </div>
+        </div>
+    </nav>
+</header>
+
+<footer th:fragment="footer"></footer>
+
+</body>
+</html>

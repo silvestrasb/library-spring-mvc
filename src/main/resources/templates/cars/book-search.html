@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="style.css" />
+    <title>Book Search</title>
+  </head>
+  <body>
+    <header>
+      <div class="navbar">
+        <img src="images/logo.png" class="logo" alt="logo" />
+        <nav>
+          <ul id="menuList">
+            <li><a href="book-search.html">Search</a></li>
+            <li><a href="book-list.html" id="logOut">Book List</a></li>
+            <li><a href="#" onclick="logoutPrompt()">Logout</a></li>
+          </ul>
+        </nav>
+        <img
+          src="images/menu.png"
+          class="menu-icon"
+          onclick="toggleMenu()"
+          alt="menu icon"
+        />
+      </div>
+    </header>
+    <main>
+      <section>
+        <h1>Search for books</h1>
+        <form method="post">
+          <input class="input-field" type="text" placeholder="Id" />
+          <input class="input-field" type="text" placeholder="Title" />
+          <input class="input-field" type="text" placeholder="Author's Name" />
+          <input
+            class="input-field"
+            type="text"
+            placeholder="Author's Surname"
+          />
+          <input class="input-field" type="text" placeholder="Genre" />
+          <input type="submit" value="Search" />
+        </form>
+      </section>
+    </main>
+
+    <footer>
+      <p>
+        Copyright &copy; 2021 CodeAcademy. Designed By Silvestras Bumblauskas.
+      </p>
+    </footer>
+    <script>
+      const menuList = document.getElementById("menuList");
+      menuList.style.height = "0px";
+      function toggleMenu() {
+        if (menuList.style.height == "0px") {
+          menuList.style.height = "130px";
+        } else {
+          menuList.style.height = "0px";
+        }
+      }
+      function logoutPrompt() {
+        prompt("Are you sure you want to logout?");
+      }
+    </script>
+  </body>
+</html>
